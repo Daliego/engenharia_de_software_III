@@ -61,3 +61,137 @@ public class Pessoa {
 9 - Não é possível zerar o acoplametno entre um software, pois nesse caso não existira a aplicação, todo o software precisa estar acoplado de alguma maneira para que haja o relacionamento entre as classes encapsuladas.
 
 10 - Sim, quanto mais encapsulado o seu código, mais difícil é de manter um alto acoplamento. No caso do exemplo da página 7, a partir do momento o que o autor passou a encapsular as datas e tornar os atributos da classe privados, a necessidade de atribuir um por um os dados diminuiu, juntamente com a utilização de menos linhas de código e a partir desse momento qualquer alteração referente a data na classe Evento, terá uma menor influência na aplicação nos locais em que a classe foi implementada, pelo menos um efeito cascata será evitado com certeza.
+
+13 -
+
+Coesão temporal:
+export default class WarehouseSystem {
+
+    protected databaseRepository: DatabaseRepository;
+    protected itemRepository: ItemRepository;
+    public warehouseRepository: WarehouseRepository;
+    protected wareItemRepository: WareItemRepository;
+
+    static async initialize(path: string) : Promise<WarehouseSystem> {
+        try {
+            let warehouseSystem = new WarehouseSystem();
+    		// poderia haver um método q retorna void que fizesse a inicialização dos dados do banco de dados
+		
+            warehouseSystem.databaseRepository = await DatabaseRepository.initialize(path);
+            warehouseSystem.itemRepository = new ItemRepository(warehouseSystem.databaseRepository.db);
+            warehouseSystem.warehouseRepository = new WarehouseRepository(warehouseSystem.databaseRepository.db);
+            warehouseSystem.wareItemRepository = new WareItemRepository(warehouseSystem.databaseRepository.db);
+
+            return warehouseSystem;
+        } catch (error) {
+            console.log((<Error>error).message);
+        }
+    }
+}
+
+Coeasao coincidental
+
+export class Item  {
+private _id: number;
+    private _description: string;
+
+    constructor(id: number, description: string) {
+            this._id = id;
+            this._description = description;
+    }
+	// Os métodos toList, e fromObject, nn são de responsabilidade da classe item e deveriam ser desacoplados e ter as suas responsabilidades passadas para outras classes.
+    toList(): Array<any> {
+        let objectList: Array<any> = new Array();
+        objectList[0] = this._id;
+        objectList[1] = this._description;
+        return objectList;
+    }
+
+    static fromObject(data: Object): Item {
+        let values: any[]= Object.values(data);
+        let item: Item = new Item(values[0], values[1]);
+
+        return item;
+    }
+}
+
+coesão de comunicação
+
+//Uma classe para cada tipo de validação de dados deveria ser criada
+
+class Utils {
+	private isValidText(textStr: string): boolean {
+        const regex: RegExp = new RegExp(/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/);
+        return regex.test(textStr);
+    }
+
+    private isValidNumber(numberStr: string): boolean {
+        const regex: RegExp = new RegExp(/^[0-9]+$/);
+        return regex.test(numberStr);
+    }
+
+    private isValidLocation(locationStr: string): boolean {
+        const regex: RegExp = new RegExp(/C[0-9]+P[0-9]+A[0-9]+$/);
+        return regex.test(locationStr);
+    }
+}
+
+//Coesão sequencial
+
+class Werehouse_System {
+	// Quebrar o método em módulos menores para poder receber os dados e deixar os código mais legível.
+async editWareItem(): Promise<void> {
+        try {
+            let value: string = utils.inputNumber('Id do item: ').toString();
+            let wareItem: WarehouseItem = await this.wareItemRepository.findWareItemByProperty('WARE_ITEM_ID', value);
+            let itemId: number = utils.inputNumber('Id do Item: ');
+            wareItem.item = await this.itemRepository.findItemById(itemId);
+            let warehouseId: number = utils.inputNumber('Id do Almoxarifado: ');
+            wareItem.warehouse = await this.warehouseRepository.findWarehouseById(warehouseId);
+            wareItem.amount = utils.inputNumber('Nova quantidade: ', true) ?? wareItem.amount;
+            wareItem.location = utils.inputLocation('Nova localização (C_P_A_): ', true) ?? wareItem.location;
+    
+            await this.wareItemRepository.updateWareItem(wareItem.id, wareItem);
+            console.log('Operação Sucedida!');
+        } catch (error) {
+            console.log((<Error>error).message);
+        }
+}
+
+
+14 -
+export class Perishable extends WarehouseItem {
+    private _expirationDate: Date;
+    
+	// Um dto deveria ter sido criada para desaclopar um pouco o código engessado, e diminuir a reutilização de código.
+
+    constructor({id, item, warehouse, insertionDate, amount, location, expirationDate} : 
+        {id: number; item: Item; warehouse: WareHouse, insertionDate: Date; amount: number; location: string; expirationDate: Date}) {
+        super({id, item, warehouse, insertionDate, amount, location})
+        this._expirationDate = expirationDate;
+    }
+		//Os métodos fromMap e toString deveriam ser desacacoplados para uma classe com a responsabilidade de fazer essas converções.
+
+    static fromMap(map: Map<string, any>): WarehouseItem {
+        return new Perishable({
+            id: map.get('WARE_ITEM_ID'),
+            item: map.get('ITEM_ID'),
+            warehouse: map.get('WAREHOUSE_ID'),
+            insertionDate: new Date(<string> map.get('INSERTION_DATE')), 
+            amount: map.get('AMOUNT'), 
+            location: map.get('LOCATION'),
+            expirationDate: new Date(<string>map.get('EXPIRATION_DATE'))
+        });
+    }
+
+    toString(): string {
+        let string = 
+        `Id: ${this.id}                         Item: ${this.item}
+         Almoxarifado: ${this.warehouse}        Data de inserção ${this.insertionDate}
+         Quantidade: ${this.amount}             Localização: ${this.location}
+         Data de Expiração: ${this.expirationDateStr}`;
+        
+        return string;
+    }
+    
+}
