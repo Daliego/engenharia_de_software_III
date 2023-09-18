@@ -1,0 +1,63 @@
+Questão 1:
+ 
+Classes coesas se referem a classes com poucas responsabilidades e que tem majoritariamente uma uníca função bem explícita. Logo, uma classe coesa deve fazer juízo ao seu objetivo principal e, portanto, manter seus métodos diretamente associados às responsabilidades definidas para a classe.
+
+2 - A coesão, relação existente entre as responsabilidades de uma classe cada um de seus métodos, é responsável por definir classes legíveis e de fácil escalabilidade. A categoria de coesão entre classes é determinada de acordo com a relação que aquela classe possui com seus métodos.
+
+Existem coesão de métodos e coesão de classes, cada corresponde a uma maneira de relacionar métodos de uma mesma classe ou classes diferentes, respectivamete.
+
+Questão 2:
+
+De acordo com o autor Leandro Luque, dentro do paradigma orientado a objetos, a coesão se refere ao relacionamento que um classe possui entre seus métodos e responsabilidades.
+
+Além disso, de acordo com o autor, uma classe é dita com "alta coesão", quando a classe trata apenas dos "deveres" relacionados a classe, e no caso contrário, em que uma classe assume uma responsabilidade de uma segunda classe, diz-se que a classe possui "baixa coesão". 
+
+A partir de estudos de coesão e as subsequentes melhorias no estudo da área, Stevens, Myers, Constantine e Yourdon, propuseram uma classificação coesa de sistemas estruturados. Nesse sentido, sete nínveis de classificação foram criados: funcional, sequencial, comunicacional, procedural, Temporal, lógica e coincidental.
+Dessa maneira, estes níveis vão desde o melhor tipo de coesão (funcional), o que significa que qualquer módulo contém um e único elemento que ajuda a executar
+uma tarefa com a pior coesão (coincidental), o que significa um módulo contém elementos que contribuem para a atividade, mas não possuem relação significativa entre eles.
+
+Ademais, outros autores, como Meilir Page-Jones, definem diferentes tipos de coesão, três para classes e três para métodos.
+
+Portanto, no artigo são destacados pelo autor diversos, conceitos e níveis referentes a caesão de classes, é claro que nem sempre é possível manter uma alta coesão ou coesão fucional, porém a tentativa de sempre manter o código o mais coeso possível torna o entendimento dos métodos de uma classe muito mais rápido e torna o código muito mais escalável.
+
+6 - O acoplamento entre classes significa que uma classe possui alguma dependência com outra classe, a herança é um dos seus maiores exemplos, pois uma subclasse depende de sua superclasse, possibilitando que pequenas alterações em uma superclasse gerem grander problemas.
+
+8 - A principal influência do principio tell dont ask está no desenvolvedor não buscar acessar as propriedades ou estados internos de outra classe, além de sempre estar atento a realização de verificações que são obrigações de outra classe. Portanto, com a implementação do principio automaticamente a aplicação está aderindo a menos acoplamento (baixo acoplamento).
+
+public class Endereco {
+    private String rua;
+    private String numero;
+    private String bairro;
+
+    //constructor e getters não mostrados não mostrado
+
+    Boolean validAddress() {
+        //Verifica se o endereço é válido;
+    }
+
+}
+
+// Com a implementação do princípio tell dont ask, a verificaçao de se o email é válido será realizada dentro da classe Endereço, logo, todo objeto instância de endereço qeu fosse colocada em Pessoa ja teria de estar validada, poupando código e evitando problemas de acoplamento.
+
+public class Pessoa {
+    private String cpf;
+    private String nome;
+
+    //Address will only be accepted if is a valid one
+    private Endereco endereco;
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+}
+
+9 - Não é possível zerar o acoplametno entre um software, pois nesse caso não existira a aplicação, todo o software precisa estar acoplado de alguma maneira para que haja o relacionamento entre as classes encapsuladas.
+
+10 - Sim, quanto mais encapsulado o seu código, mais difícil é de manter um alto acoplamento. No caso do exemplo da página 7, a partir do momento o que o autor passou a encapsular as datas e tornar os atributos da classe privados, a necessidade de atribuir um por um os dados diminuiu, juntamente com a utilização de menos linhas de código e a partir desse momento qualquer alteração referente a data na classe Evento, terá uma menor influência na aplicação nos locais em que a classe foi implementada, pelo menos um efeito cascata será evitado com certeza.
