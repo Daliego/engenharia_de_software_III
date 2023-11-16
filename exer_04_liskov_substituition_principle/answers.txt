@@ -1,0 +1,22 @@
+1 - Por que o uso do nome próprio Liskov?
+
+    O nome foi dado com base no nome da criadora do princípio, a Barbara Liskov, primeira mulher a conseguir um doutorado na área
+    da Ciência da Computação.
+
+2 - Qual a principal imagem relacionada ao princípio e qual a explicação sobre ela?
+    
+    A principal característica do princípio proposto por Liskov:
+        "Let Φ(x) be a property provable about objects x of type T. Then Φ(y) should be true for objects y 
+        of type S where S is a subtype of T."
+    Dessa maneira, o princípio esclarece que se um objeto A é uma instância de uma classe X, que herda de uma classe Y, então o objeto A, deve se comportar como qualquer instância de Y é esperada se comportar, no caso de o objeto ser tratado com um objeto do tipo X.
+
+
+3 - Cite um exemplo onde a herança pode ser usada de forma conveniente, porém
+deixa uma impressão de que está sendo mal aplicada.
+    - Quando a subclasse anula variáveis ou métodos (exemplo no código).
+
+4 - Cite um exemplo onde a herança pode ser usada de forma conveniente, porém
+deixa futuras expansões comprometidas ou com problemas de design.
+    - Quando um objeto precisa mudar para outra classe (exemplo no código)
+
+5 - Nos exemplos que você citou, a composição seria mais aplicável? Refaça-os.
