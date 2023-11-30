@@ -1,0 +1,16 @@
+4. Comente as seguintes frases à luz do ISP:
+a. “Nenhum cliente deve ser forçado a depender de métodos que ele não
+usa”;
+b. “Classes não devem ser forçadas a implementar interfaces que não usam”;
+
+A. “Nenhum cliente deve ser forçado a depender de métodos que ele não
+usa”:
+
+- Os clientes, que se referem as classes, não devem ser forçados a implementar interfaces que não 
+fazem partes dos métodos que constituiram a classe, ou seja, uma nova interface deveria ser criada
+ com somente os métodos que farão de fato parte da responsabilidade da classe.
+
+B. “Classes não devem ser forçadas a implementar interfaces que não usam”;
+
+- Classes só deveriam implementar interfaces em que todos os seus métodos fazer parte do dever da 
+classe (cliente) dentro da aplicação.

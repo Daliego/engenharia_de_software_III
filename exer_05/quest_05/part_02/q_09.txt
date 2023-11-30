@@ -1,0 +1,7 @@
+9. Você acha que esse princípio deveria ser um dos primeiros em um eventual
+“check-list” de princípios SOLID a aplicarmos?
+
+    Acredito que na ordem de aprendizado ele deveria ser realmete uma das últimas, pois somente posterior
+    ao estudante apreender conceitos de abstração com os conceitos de segregação de interface e, principalmente, 
+    o princípio do open closed, que permite o aluno visualizar como um interface pode ser utilizada no sistema 
+    ao invés da utilização direta das classes que irão implementar a interface.

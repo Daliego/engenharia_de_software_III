@@ -1,0 +1,6 @@
+2. Por que devemos segregar implementações através do uso de interfaces?
+
+
+Nós segregamos implementações através de interfaces para que as classes sejam obrigadas
+a respeitar as regras de negócio da aplicação, além de permitir que outras classes sejam 
+criadas com o mesmo formato e implementações diferentes.

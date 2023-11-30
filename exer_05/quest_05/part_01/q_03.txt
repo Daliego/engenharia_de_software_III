@@ -1,0 +1,9 @@
+3. Podemos dizer que esse princípio é correlato ao Single Responsability Principle
+pelo fato de que classes e interfaces devem ter um único “foco” (SRP) e que as
+interfaces com métodos não correlatos devem ser segregadas (ISP)?
+
+Sim, pois assim como o SRP, as interfaces somente devem ser reutilizadas 
+se sua impementação não interferir na responsabilidade da classe, 
+caso contrário a responsabilidade de abstrair os métodos da classe 
+devem ser passados para uma nova interface criada para atender a 
+responsabilidade especifíca.

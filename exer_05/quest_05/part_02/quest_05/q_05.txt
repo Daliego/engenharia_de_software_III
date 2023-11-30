@@ -1,0 +1,5 @@
+5. Qual a principal imagem relacionada ao princípio e qual a explicação sobre ela?7
+
+    A imagem tem por objetivo mostrar que uma classe não necessariamente precisa conhecer o 
+    que os métodos que ela executa fazem. Nesse sentido, é melhor não saber como a energia 
+    que você utiliza diariamente é produzida e nem as suas consequências para o meio ambiente.

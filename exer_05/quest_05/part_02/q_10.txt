@@ -1,0 +1,10 @@
+10. Numa visão geral, considera que se começarmos pelos 4 primeiros princípios 
+SOLID, fatalmente o DIP já estaria implementado?
+
+    Sim, pois principalmente dentro do princípio do open-closed, é muito utilizado o conceito
+    de injeção de dependência na classe e de programação de interfaces, que são partes 
+    fundametais e que conversam diretamente com os conceitos do princípio da inversão de dependência.
+    Nesse sentido, dentro do princípio, a inversão de dependência existe quando a classe tem métodos 
+    que dependem da instância de outras classes que implementam a mesma interface esperada pela classe,
+    a exemplo das classes de validação de dados, e a programação de interfaces é utilizada justamente 
+    por métodos que invocam funcionalidades de outra classe sem conhecer suas especificidades.

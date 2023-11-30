@@ -1,0 +1,6 @@
+1. Qual a principal imagem relacionada ao princípio e qual a explicação sobre ela?
+
+O principal represetante do ISP, Interface Segregation Principle, 
+são as interfaces gigantes utilizadas para economizar código, agregando métodos descessários ás classes.
+Dessa maneira, a imagem sugere um questionamento do porque adicionar à estrutura do produto final, algo 
+na qual ele não tem necessidade e não saberá como utilizar.
